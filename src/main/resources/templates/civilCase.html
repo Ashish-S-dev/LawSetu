@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+	content="Get expert assistance and legal consultation for civil cases from experienced lawyers on LawSetu.">
+<meta name="keywords"
+	content="civil case lawyer, civil legal help, advocate consultation, civil dispute, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Civil Case Support – LawSetu</title>
+
+<title>LawSetu</title>
+
+<link rel="stylesheet" href="./CSS/civil.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+body.dark {
+	background: #111;
+	color: white;
+}
+
+.navbar {
+	background: #f8f9fa;
+}
+
+.city-scroll span {
+	margin: 0 8px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.city-scroll span.active-city {
+	background: orange;
+	color: black;
+	font-weight: bold;
+}
+
+.sidebar {
+	background: #f1f1f1;
+	/*min-height: 100vh;*/
+}
+
+body.dark {
+	background: #111 !important;
+	color: #fff !important;
+}
+
+/* NAVBAR */
+body.dark .navbar {
+	background: #1e1e1e !important;
+	color: white !important;
+}
+
+/* SIDEBAR */
+body.dark .sidebar {
+	background: #1a1a1a !important;
+	color: white !important;
+}
+
+/* CARDS */
+body.dark .card {
+	background: #222 !important;
+	color: white !important;
+	border: 1px solid #333;
+}
+
+/* INPUTS */
+body.dark select, body.dark input {
+	background: #2a2a2a !important;
+	color: white !important;
+	border: 1px solid #444;
+}
+
+/* CITY NAV */
+body.dark .city-scroll span {
+	background: #333;
+	color: white;
+}
+
+/* ACTIVE CITY */
+body.dark .city-scroll span.active-city {
+	background: orange;
+	color: black;
+}
+
+css
+
+.card img {
+	object-fit: cover;
+}
+.navbar-brand{
+	color:var(--accent);
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- 🔥 NAVBAR -->
+	<nav class="navbar navbar-expand-lg px-3 sticky-top">
+
+		<button class="btn btn-warning me-2" style="color:var(--text); background-color:var(--accent) !important;" onclick="goBack()">⬅Back</button>
+
+		<a class="navbar-brand fw-bold">⚖️ LawSetu</a>
+
+		<button class="navbar-toggler" style="color:var(--text); background-color:var(--accent) !important;" type="button" data-bs-toggle="collapse"
+			data-bs-target="#nav">☰</button>
+
+		<div class="collapse navbar-collapse" id="nav">
+
+			<div
+				class="ms-auto d-flex flex-column flex-lg-row align-items-lg-center gap-2">
+
+				<!-- CITY NAV -->
+				<div class="city-scroll">
+					<span onclick="scrollToSection('lucknow')">Lucknow</span> <span
+						onclick="scrollToSection('amethi')">Amethi</span> <span
+						onclick="scrollToSection('prayagraj')">Prayagraj</span>
+				</div>
+
+				<button class="btn btn-warning" onclick="toggleMode()">🌙</button>
+
+			</div>
+
+		</div>
+	</nav>
+
+	<!-- 🔥 MAIN -->
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- SIDEBAR -->
+			<div class="col-lg-3 sidebar p-3">
+
+				<h5>Filters</h5>
+
+				<select class="form-select mb-2" name="city">
+					<option value="all">All City</option>
+					<option value="lucknow">Lucknow</option>
+					<option value="amethi">Amethi</option>
+					<option value="prayagraj">Prayagraj</option>
+				</select> <select class="form-select mb-2" name="court">
+					<option value="all">Court Type</option>
+					<option value="district">District Court</option>
+					<option value="high">High Court</option>
+					<option value="supreme">Supreme Court</option>
+				</select> <select class="form-select mb-2" name="experience">
+					<option value="all">Experience</option>
+					<option value="0-2">0-2 Years</option>
+					<option value="3-5">3-5 Years</option>
+					<option value="5+">5+ Years</option>
+				</select> <select class="form-select mb-2" name="language">
+					<option value="all">Language</option>
+					<option value="hindi">Hindi</option>
+					<option value="english">English</option>
+				</select> <select class="form-select mb-2" name="rating">
+					<option value="all">Rating</option>
+					<option value="5">5+</option>
+					<option value="4">4+</option>
+					<option value="3">3+</option>
+				</select>
+
+			</div>
+
+			<!-- CONTENT -->
+			<div class="col-lg-9 p-3">
+				<div id="content"></div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- BOOTSTRAP JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- YOUR JS -->
+	<script>
+	
+	/* ---------------- BACK + MODE ---------------- */
+	function goBack() {
+	    window.history.back();
+	}
+
+	
+
+	function startCall(name) {
+	    const roomID = encodeURIComponent(name);
+	    window.location.href = `/videocall/frontend/index.html?room=${roomID}`;
+	}
+
+	function startChat(name) {
+	    alert("Chat with " + name);
+	}
+
+	/* ---------------- ADVOCATE DATA (WITH ONLINE IMAGES) ---------------- */
+	const advocates = [
+	    { name: "Rahul Lucknow", city: "lucknow", rating: 5, experience: "5+", language: "hindi", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/32.jpg" },
+
+	    { name: "Priya Lucknow", city: "lucknow", rating: 4, experience: "3-5", language: "english", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/44.jpg" },
+
+	    { name: "Aman Lucknow", city: "lucknow", rating: 5, experience: "5+", language: "hindi", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/45.jpg" },
+
+	    { name: "Neha Lucknow", city: "lucknow", rating: 4, experience: "0-2", language: "hindi", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/65.jpg" },
+
+	    { name: "Rohan Lucknow", city: "lucknow", rating: 3, experience: "3-5", language: "english", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/22.jpg" },
+
+	    { name: "Suresh Lucknow", city: "lucknow", rating: 5, experience: "5+", language: "hindi", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/12.jpg" },
+
+	    { name: "Rahul Amethi", city: "amethi", rating: 5, experience: "5+", language: "hindi", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/33.jpg" },
+
+	    { name: "Priya Amethi", city: "amethi", rating: 4, experience: "3-5", language: "english", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/21.jpg" },
+
+	    { name: "Aman Amethi", city: "amethi", rating: 5, experience: "5+", language: "hindi", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/53.jpg" },
+
+	    { name: "Neha Amethi", city: "amethi", rating: 4, experience: "0-2", language: "english", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/12.jpg" },
+
+	    { name: "Rohan Amethi", city: "amethi", rating: 3, experience: "3-5", language: "hindi", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/14.jpg" },
+
+	    { name: "Suresh Amethi", city: "amethi", rating: 5, experience: "5+", language: "hindi", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/55.jpg" },
+
+	    { name: "Rahul Prayagraj", city: "prayagraj", rating: 5, experience: "5+", language: "english", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/88.jpg" },
+
+	    { name: "Priya Prayagraj", city: "prayagraj", rating: 4, experience: "3-5", language: "hindi", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/77.jpg" },
+
+	    { name: "Aman Prayagraj", city: "prayagraj", rating: 5, experience: "5+", language: "hindi", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/66.jpg" },
+
+	    { name: "Neha Prayagraj", city: "prayagraj", rating: 4, experience: "0-2", language: "english", court: "district",
+	      image: "https://randomuser.me/api/portraits/women/55.jpg" },
+
+	    { name: "Rohan Prayagraj", city: "prayagraj", rating: 3, experience: "3-5", language: "hindi", court: "high",
+	      image: "https://randomuser.me/api/portraits/men/77.jpg" },
+
+	    { name: "Suresh Prayagraj", city: "prayagraj", rating: 5, experience: "5+", language: "english", court: "supreme",
+	      image: "https://randomuser.me/api/portraits/men/99.jpg" }
+	];
+
+	/* ---------------- FILTER STATE ---------------- */
+	let selectedCity = "all";
+	let selectedLanguage = "all";
+	let selectedRating = "all";
+	let selectedExperience = "all";
+	let selectedCourt = "all";
+
+	/* ---------------- FILTER ENGINE ---------------- */
+	function applyFilters() {
+
+	    const container = document.getElementById("content");
+
+	    let filtered = advocates.filter(a => {
+
+	        let cityMatch = selectedCity === "all" || a.city === selectedCity;
+	        let langMatch = selectedLanguage === "all" || a.language === selectedLanguage;
+	        let expMatch = selectedExperience === "all" || a.experience === selectedExperience;
+	        let courtMatch = selectedCourt === "all" || a.court === selectedCourt;
+	        let ratingMatch = selectedRating === "all" || a.rating >= parseInt(selectedRating);
+
+	        return cityMatch && langMatch && expMatch && courtMatch && ratingMatch;
+	    });
+
+	    container.innerHTML = filtered.map(a => `
+	        <div class="card mb-3 shadow">
+	            <div class="row p-2 align-items-center">
+
+	                <div class="col-md-3 text-center">
+	                    <img src="${a.image}" 
+	                         onerror="this.src='https://via.placeholder.com/120'"
+	                         width="120" height="120"
+	                         class="rounded">
+	                </div>
+
+	                <div class="col-md-6">
+	                    <h5>${a.name}</h5>
+
+	                    <p>⭐ Rating: ${a.rating}</p>
+	                    <p>⚖ Court: ${a.court}</p>
+	                    <p>🧠 Experience: ${a.experience} yrs</p>
+	                    <p class="text-muted">
+	                        ${a.city} | ${a.language}
+	                    </p>
+	                </div>
+
+	                <div class="col-md-3 text-center">
+	                    <button class="btn btn-success w-100 mb-2"
+	                        onclick="window.location.href='video-call'">📞 Call</button>
+
+	                    <button class="btn btn-primary w-100"
+	                        onclick="startChat('${a.name}')">💬 Chat</button>
+	                </div>
+
+	            </div>
+	        </div>
+	    `).join("");
+	}
+
+	/* ---------------- CITY CLICK ---------------- */
+	function scrollToSection(city) {
+	    selectedCity = city;
+	    applyFilters();
+	}
+
+	/* ---------------- SIDEBAR FILTER ---------------- */
+	document.addEventListener("change", function (e) {
+
+	    const val = e.target.value;
+
+	    if (e.target.name === "city") selectedCity = val;
+	    if (e.target.name === "language") selectedLanguage = val;
+	    if (e.target.name === "experience") selectedExperience = val;
+	    if (e.target.name === "rating") selectedRating = val;
+	    if (e.target.name === "court") selectedCourt = val;
+
+	    applyFilters();
+	});
+
+	/* ---------------- INIT ---------------- */
+	window.onload = () => {
+	    applyFilters();
+	}; 
+	
+	/*Theme*/
+	window.onload = function () {
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    document.body.classList.add(savedTheme);
+}
+
+
+function toggleMode() {
+
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+
+    
+    // SAVE THEME
+
+    if(body.classList.contains("dark")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+    }
+}
+	
+	</script>
+
+</body>
+</html>

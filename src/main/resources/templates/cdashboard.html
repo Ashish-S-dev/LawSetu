@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description"
+	content="Manage your legal consultations, requests, video calls and case updates from the LawSetu client dashboard.">
+<meta name="keywords"
+	content="lawyer, legal help, online advocate, legal consultation, lawsetu,client dashboard, legal case tracking, lawyer consultation, LawSetu client, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Client Dashboard – LawSetu</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+
+/* ================= THEME ================= */
+:root {
+	--bg: #FAFAFA;
+	--card: #ffffff;
+	--primary: #111111;
+	--accent: #D4AF37;
+	--text: #1F2937;
+	--shadow: rgba(0, 0, 0, 0.08);
+}
+
+body.dark {
+	--bg: #0A0A0A;
+	--card: #1A1A1A;
+	--primary: #ffffff;
+	--accent: #FFD700;
+	--text: #ffffff;
+	--shadow: rgba(255, 255, 255, 0.06);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= floating button ================= */
+.floating {
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.floating button {
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 12px;
+	background: var(--accent);
+	font-size: 18px;
+	box-shadow: 0 10px 20px var(--shadow);
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+	/*min-height: 100vh; */
+	
+	
+	background: #17324D;
+	color: white;
+	transition: 0.3s ease;
+}
+
+.logo-img {
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 3px solid white;
+}
+
+/* ================= TOPBAR ================= */
+.topbar {
+	background: var(--card);
+	box-shadow: 0 5px 15px var(--shadow);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+/* ================= MENU ================= */
+.topbar-menu {
+	display: flex;
+	gap: 5px;
+	flex-wrap: wrap;
+}
+
+.topbar-menu button {
+	border: 1px solid var(--accent);
+	background: transparent;
+	color: var(--text);
+	border-radius: 20px;
+	padding: 4px 10px;
+}
+
+.topbar-menu button.active, .topbar-menu button:hover {
+	background: var(--accent);
+	color: black;
+}
+
+/* Topbar Selesct */
+.topbar-select {
+	display: none;
+	text-align: center;
+	flex: 2;
+	margin-inline: 5rem;
+}
+
+.topbar-select select {
+	background-color: var(--bg);
+	color: var(--text);
+	border: 1px solid var(--accent);
+}
+
+
+/* ================= CARD ================= */
+.card3d {
+	background: var(--card);
+	border-radius: 15px;
+	box-shadow: 0 15px 35px var(--shadow);
+	padding: 20px;
+}
+
+/*   Modal CSS */
+.modal-content {
+	background-color: var(--card);
+}
+
+.modal-body form input {
+	background-color: var(--bg);
+}
+
+.modal-body form textarea {
+	background-color: var(--bg);
+}
+
+/* User Welcome*/
+.welcome-section {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.welcome-content {
+	width: 100%;
+	max-width: 1200px;
+	background-color: var(--bg);
+	padding: 30px;
+	border-radius: 30px;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+	color: white;
+	position: relative;
+	overflow: hidden;
+	color: var(--text);
+}
+
+.welcome-content::before {
+	content: "";
+	position: absolute;
+	top: -100px;
+	right: -100px;
+	width: 280px;
+	height: 280px;
+	background: rgba(212, 175, 55, 0.15);
+	border-radius: 50%;
+}
+
+.tag {
+	display: inline-block;
+	padding: 10px 18px;
+	background: rgba(212, 175, 55, 0.15);
+	border: 1px solid var(--accent);
+	border-radius: 30px;
+	color: var(--text);
+	font-size: 0.9rem;
+	margin-bottom: 25px;
+}
+
+.welcome-content h1 {
+	font-size: 3.2rem;
+	line-height: 1.2;
+	margin-bottom: 25px;
+	max-width: 700px;
+}
+
+.welcome-content>p {
+	font-size: 1.05rem;
+	line-height: 1.9;
+	color: var(--text);
+	max-width: 850px;
+	margin-bottom: 45px;
+}
+
+.welcome-features {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 25px;
+	margin-bottom: 45px;
+}
+
+.feature-card {
+	background: var(--card);
+	border: 1px solid var(--shadow);
+	padding: 28px;
+	border-radius: 22px;
+	transition: 0.3s;
+	backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+	transform: translateY(-6px);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-card h3 {
+	font-size: 1.2rem;
+	margin-bottom: 14px;
+	color: var(--accent);
+}
+
+.feature-card p {
+	font-size: 0.95rem;
+	line-height: 1.7;
+	color: var(--text);
+}
+
+.btn-group {
+	display: flex;
+	gap: 18px;
+	flex-wrap: wrap;
+}
+
+.btn-group button {
+	padding: 15px 30px;
+	border: none;
+	border-radius: 14px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.primary-btn {
+	background: #D4AF37;
+	color: #111827;
+}
+
+.secondary-btn {
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: white;
+}
+
+.btn-group button:hover {
+	transform: translateY(-3px);
+}
+
+@media ( max-width :992px) {
+	.welcome-content {
+		padding: 45px;
+	}
+	.welcome-content h1 {
+		font-size: 2.5rem;
+	}
+}
+
+@media ( max-width :768px) {
+	.welcome-section {
+		padding: 40px 15px;
+	}
+	.welcome-content {
+		padding: 35px 25px;
+		border-radius: 24px;
+	}
+	.welcome-content h1 {
+		font-size: 2rem;
+	}
+	.welcome-content>p {
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+	.btn-group {
+		flex-direction: column;
+	}
+	.btn-group button {
+		width: 100%;
+	}
+}
+
+@media ( max-width :480px) {
+	.welcome-content h1 {
+		font-size: 1.7rem;
+	}
+	.tag {
+		font-size: 0.8rem;
+	}
+	.feature-card {
+		padding: 22px;
+	}
+}
+
+/* ================= MOBILE ================= */
+@media ( max-width :769px) {
+	.sidebar {
+		position: fixed;
+		left: -260px;
+		width: 250px;
+		height: 100%;
+		z-index: 1050;
+	}
+	.sidebar.active {
+		left: 0;
+	}
+}
+
+/* ================= MOBILE at 600 ================= */
+@media ( max-width :600px) {
+	.topbar-menu {
+		display: none;
+	}
+	.topbar-select {
+		display: block;
+	}
+}
+
+@media ( max-width :500px) {
+	.topbar-select {
+		margin-inline: 3rem;
+	}
+}
+
+@media ( max-width :350px) {
+	.topbar-select {
+		margin-inline: 2rem;
+	}
+}
+
+@media ( max-width :200px) {
+	.topbar-select {
+		margin-inline: 0rem;
+	}
+}
+
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+
+.overlay.active {
+	display: block;
+}
+</style>
+</head>
+
+<body class="light">
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- ================= SIDEBAR ================= -->
+			<!-- ================= SIDEBAR ================= -->
+			<div class="col-lg-2 sidebar p-3 text-center" id="sidebar">
+
+				<!-- 🔥 LOGO -->
+				<a href="#"> <img th:src="@{/img/logo.png}"
+					class="logo-img mb-2" alt="Logo">
+				</a>
+
+				<!-- 🔥 USER PROFILE IMAGE -->
+				<img src="https://i.pravatar.cc/100?img=12"
+					class="rounded-circle mb-2"
+					style="width: 90px; height: 90px; object-fit: cover; border: 3px solid white;">
+
+				<!-- 🔥 USER NAME -->
+				<p class="fw-bold mb-3" id="client-name">...</p>
+
+				<!-- 🔥 SOCIAL PROFILE BUTTON (School ke upar) -->
+				<a href="user-profile" class="btn btn-warning w-100 mb-3"> 👤
+					View Profile </a>
+
+				<!-- 🔥 SCHOOL BUTTON -->
+
+
+
+
+				<button class="btn btn-light w-100 mb-2" onclick="toggleMenu()">
+					📚 Legal Services</button>
+				<!-- 🔽 SCHOOL MENU -->
+				<div id="menu" class="d-none">
+
+					<button
+						onclick="window.location.href='/lawsetu/client-casedetails'"
+						class="btn btn-outline-light w-100 mb-2">Legal Records</button>
+
+					<button class="btn btn-outline-light w-100 mb-2"
+						onclick="toggleLawyerMenu()">Lawyer Finder</button>
+
+					<!-- SUBMENU -->
+					<div id="lawyerMenu" class="d-none">
+
+						<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+							class="btn btn-sm btn-outline-warning w-100 mb-2">Civil
+							Case</button>
+
+						<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+							class="btn btn-sm btn-outline-warning w-100 mb-2">
+							Family Case</button>
+
+						<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+							class="btn btn-sm btn-outline-warning w-100 mb-2">
+							Criminal Case</button>
+
+					</div>
+
+				</div>
+
+				<button class="btn btn-light w-100 mb-2" data-bs-toggle="modal"
+					data-bs-target="#queryModal">Submit Query ?</button>
+
+				<button class="btn btn-light w-100 mb-2"
+					onclick="window.location.href='/lawsetu/about-lawsetu'">About
+					us</button>
+
+
+				<button class="btn btn-light w-100 mb-2"
+					onclick="window.location.href='/lawsetu'">Logout</button>
+
+			</div>
+
+			<!-- ================= MAIN ================= -->
+			<div class="col-lg-10 p-0">
+
+				<!-- TOPBAR -->
+				<div
+					class="topbar p-2 d-flex justify-content-between align-items-center">
+
+
+					<div class="topbar-menu">
+						<button onclick="showData('civil')">Civil Cases</button>
+						<button onclick="showData('criminal')">Criminal Cases</button>
+						<button onclick="showData('administrative')">Administrative
+							Cases</button>
+					</div>
+
+					<div class="topbar-select">
+						<select class="form-control" onchange="showDataFirst(this.value)">
+							<option value="home">Filter Cases</option>
+							<option value="home">Home</option>
+							<option value="civil">Civil Cases</option>
+							<option value="criminal">Criminal Cases</option>
+							<option value="administrative">Administrative Cases</option>
+						</select>
+					</div>
+
+					<button class="btn btn-warning btn-sm" onclick="toggleTheme()">🌙</button>
+					<button class="btn btn-dark d-md-none" onclick="toggleSidebar()"
+						style="margin-left: .5rem;">☰</button>
+
+				</div>
+
+				<!-- CONTENT -->
+				<div class="container mt-3">
+					<div id="content" class="card3d">
+						<section class="welcome-section">
+
+							<div class="welcome-content">
+
+								<span class="tag">⚖ Professional Legal Assistance</span>
+
+								<h1>Welcome to Your Secure Legal Dashboard</h1>
+
+								<p>Manage your legal activities with confidence through a
+									modern, secure, and professionally designed platform. Access
+									case records, explore legal services, connect with experienced
+									professionals, and stay informed about every important update —
+									all from one centralized workspace.</p>
+
+								<div class="welcome-features">
+
+									<div class="feature-card">
+										<h3>Case Management</h3>
+										<p>Organize and review your previous legal records and
+											ongoing matters efficiently.</p>
+									</div>
+
+									<div class="feature-card">
+										<h3>Trusted Legal Support</h3>
+										<p>Find professional legal guidance and connect with
+											experienced lawyers easily.</p>
+									</div>
+
+									<div class="feature-card">
+										<h3>Secure Access</h3>
+										<p>Your legal information remains protected with a secure
+											and reliable system.</p>
+									</div>
+
+								</div>
+
+
+
+							</div>
+
+						</section>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="overlay" id="overlay"></div>
+	<div class="floating">
+		<button class="assistant">💡</button>
+		<button class="query" data-bs-toggle="modal"
+			data-bs-target="#queryModal">❓</button>
+	</div>
+	<!--model-->
+	<div class="modal fade" id="queryModal">
+		<div
+			class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title">Submit Legal Query</h5>
+					<button class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<div class="modal-body">
+					<form>
+
+						<div class="mb-3">
+							<label class="form-label">Name *</label> <input type="text"
+								class="form-control" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Email *</label> <input type="email"
+								class="form-control" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Message *</label>
+							<textarea class="form-control" rows="4" required></textarea>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button class="btn btn-warning">Submit</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="queryModal">
+		<div
+			class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title">Submit Legal Query</h5>
+					<button class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<div class="modal-body">
+					<form>
+
+						<div class="mb-3">
+							<label class="form-label">Name *</label> <input type="text"
+								class="form-control" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Email *</label> <input type="email"
+								class="form-control" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Phone *</label> <input type="text"
+								class="form-control" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Case Type</label> <select
+								class="form-select">
+								<option>Criminal</option>
+								<option>Civil</option>
+								<option>Family</option>
+								<option>Corporate</option>
+								<option>Property</option>
+							</select>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Urgency</label> <select
+								class="form-select">
+								<option>Low</option>
+								<option>Medium</option>
+								<option>High</option>
+							</select>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Description *</label>
+							<textarea class="form-control" rows="4" required></textarea>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button class="btn btn-warning">Submit</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+
+/* ================= THEME ================= */
+
+
+/* ================= SIDEBAR ================= */
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
+}
+
+document.getElementById("overlay").onclick = ()=>{
+toggleSidebar();
+};
+
+/* ================= MENU ================= */
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("d-none");
+}
+
+/* ================= DATA ================= */
+const lawData = {
+
+civil: `
+	<h2>Civil Law</h2>
+
+	<p>
+	Civil law deals with disputes between individuals, families, organizations,
+	or businesses where compensation, settlement, or legal resolution is required.
+	These cases generally do not involve criminal punishment.
+	</p>
+
+	<h4>Family Law</h4>
+
+	<p>
+	Family law focuses on domestic and relationship-related legal matters such as marriage,
+	divorce, maintenance, child custody, and family disputes.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Hindu Marriage Act :</strong>
+	        Governs marriage, divorce, judicial separation, and legal rights of Hindu couples.
+	    </li>
+
+	    <li>
+	        <strong>Divorce Laws :</strong>
+	        Covers mutual divorce, contested divorce, separation rights, and legal settlements.
+	    </li>
+
+	    <li>
+	        <strong>Child Custody :</strong>
+	        Determines guardianship, child welfare, visitation rights, and parental responsibilities.
+	    </li>
+
+	    <li>
+	        <strong>Maintenance Section 125 :</strong>
+	        Provides financial support rights for spouse, children, and dependent parents.
+	    </li>
+	</ul>
+
+	<h4>Property Law</h4>
+
+	<p>
+	Property law handles ownership rights, land disputes, inheritance matters,
+	and real estate conflicts between parties.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Land Ownership Disputes :</strong>
+	        Resolves conflicts related to land possession, boundaries, and ownership claims.
+	    </li>
+
+	    <li>
+	        <strong>Property Registration :</strong>
+	        Deals with legal transfer, registration, and verification of property documents.
+	    </li>
+
+	    <li>
+	        <strong>Inheritance Property :</strong>
+	        Covers distribution of ancestral and inherited properties among family members.
+	    </li>
+
+	    <li>
+	        <strong>Tenant & Rent Issues :</strong>
+	        Includes rent agreements, eviction notices, and tenant protection matters.
+	    </li>
+	</ul>
+
+	<hr>
+`,
+
+criminal: `
+	<h2>Criminal Law</h2>
+
+	<p>
+	Criminal law deals with offenses against society, public safety, and government regulations.
+	These cases may result in punishment, imprisonment, or fines.
+	</p>
+
+	<h4>Cyber Crime</h4>
+
+	<p>
+	Cyber crime involves illegal digital activities performed using computers,
+	networks, or the internet.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Online Fraud :</strong>
+	        Covers scams, fake transactions, phishing attacks, and digital payment frauds.
+	    </li>
+
+	    <li>
+	        <strong>Identity Theft :</strong>
+	        Involves misuse of personal information, passwords, or confidential data.
+	    </li>
+
+	    <li>
+	        <strong>Hacking :</strong>
+	        Unauthorized access to systems, websites, or online accounts.
+	    </li>
+
+	    <li>
+	        <strong>Social Media Crimes :</strong>
+	        Includes cyber bullying, online harassment, and fake profile misuse.
+	    </li>
+	</ul>
+
+	<h4>Financial & Criminal Offenses</h4>
+
+	<p>
+	These cases involve unlawful activities causing financial loss,
+	public harm, or violation of criminal laws.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Theft & Robbery :</strong>
+	        Illegal taking of money, valuables, or property from another person.
+	    </li>
+
+	    <li>
+	        <strong>Fraud Cases :</strong>
+	        Includes cheating, forgery, and financial scams.
+	    </li>
+
+	    <li>
+	        <strong>Drug Offenses :</strong>
+	        Covers possession, trafficking, or illegal distribution of prohibited substances.
+	    </li>
+
+	    <li>
+	        <strong>Assault Cases :</strong>
+	        Physical attacks, threats, or acts causing bodily harm.
+	    </li>
+	</ul>
+
+	<hr>
+`,
+
+administrative: `
+	<h2>Administrative Law</h2>
+
+	<p>
+	Administrative law regulates actions and decisions of government departments,
+	public authorities, and regulatory bodies.
+	</p>
+
+	<h4>Labour & Employment Law</h4>
+
+	<p>
+	These laws protect employee rights, workplace safety,
+	and employer responsibilities.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Salary Disputes :</strong>
+	        Resolves unpaid wages, delayed salaries, and compensation issues.
+	    </li>
+
+	    <li>
+	        <strong>Wrongful Termination :</strong>
+	        Deals with unfair dismissal or illegal removal from employment.
+	    </li>
+
+	    <li>
+	        <strong>Workplace Harassment :</strong>
+	        Covers employee protection against abuse, discrimination, or misconduct.
+	    </li>
+
+	    <li>
+	        <strong>Employment Contracts :</strong>
+	        Handles legal disputes related to company agreements and service terms.
+	    </li>
+	</ul>
+
+	<h4>Consumer & Public Administration</h4>
+
+	<p>
+	Administrative authorities also handle public complaints,
+	consumer protection, and regulatory compliance matters.
+	</p>
+
+	<ul>
+	    <li>
+	        <strong>Consumer Complaints :</strong>
+	        Covers defective products, poor services, and unfair trade practices.
+	    </li>
+
+	    <li>
+	        <strong>Tax Disputes :</strong>
+	        Related to income tax, GST, and government tax regulations.
+	    </li>
+
+	    <li>
+	        <strong>License & Permit Issues :</strong>
+	        Includes cancellation, approval, or renewal of legal permits.
+	    </li>
+
+	    <li>
+	        <strong>Public Service Complaints :</strong>
+	        Addresses complaints against government departments or public authorities.
+	    </li>
+	</ul>
+`,
+
+
+};
+
+/* ================= SHOW DATA ================= */
+function showData(type){
+
+document.getElementById("content").innerHTML = lawData[type];
+
+document.querySelectorAll(".topbar-menu button").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+event.target.classList.add("active");
+
+}
+
+window.toggleLawyerMenu = function(){
+        const menu = document.getElementById("lawyerMenu");
+        if(menu){
+            menu.classList.toggle("d-none");
+        }
+    }
+
+ 
+    // 💡 AI Assistant
+document.querySelector(".assistant").addEventListener("click", function () {
+    alert("AI Assistant Coming Soon 🤖");
+});
+
+    
+   // ========= theme
+   window.onload = function () {
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    document.body.classList.add(savedTheme);
+}
+
+
+function toggleMode() {
+
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+
+    
+    // SAVE THEME
+
+    if(body.classList.contains("dark")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+    }
+}
+
+window.onload = function () {
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    document.body.classList.add(savedTheme);
+}
+
+
+function toggleTheme() {
+
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+
+    
+    // SAVE THEME
+
+    if(body.classList.contains("dark")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+    }
+}
+
+// Session Data Access
+
+ async function accessSessionData(){
+	
+	    const response = await fetch(
+	            "/lawsetu/session-data",
+	            {
+	                method: "GET",
+	                credentials: "include"
+	            }
+	        );
+
+	        const data = await response.json();
+
+	        document.getElementById("client-name").innerText = data.userName;
+	 
+}
+ 
+accessSessionData();
+
+
+function showDataFirst(value){
+	if(value==="civil"){
+		showData('civil');
+	}else if(value==="criminal"){
+		showData('criminal');
+	}else if(value==="administrative"){
+		showData('administrative');
+	}else{
+		window.location.reload();
+	}
+}
+
+</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

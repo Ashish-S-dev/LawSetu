@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description"
+	content="Update your professional and personal profile details securely on LawSetu.">
+<meta name="keywords"
+	content="update profile, lawyer account settings, client profile, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Update Profile – LawSetu</title>
+
+<link rel="icon" th:href="@{/img/logo.png}">
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/css/updateprofile.css}">
+</head>
+
+<body class="light">
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Sidebar -->
+			<div class="col-lg-2 col-md-3 sidebar p-3" id="sidebar">
+
+				<h4 class="text-center">
+					<a href="client-dashboard"> <img th:src="@{/img/logo.png}"
+						class="logo-img" alt="Logo">
+					</a>
+				</h4>
+
+				<p class="small text-center">Durgesh Pandey</p>
+
+				<div class="d-flex flex-column gap-3 mt-4">
+					<a href="client-dashboard" class="btn btn-warning w-100">Dashboard</a>
+					<div class="menu-wrapper">
+
+
+						<!-- School Button -->
+						<div class="mb-2">
+							<button type="button" class="btn btn-outline-light w-100"
+								onclick="toggleSchoolMenu()">Legal Services</button>
+						</div>
+
+						<!-- School Menu -->
+						<div id="schoolMenu" class="submenu d-none">
+
+							<button onclick="window.location.href='/lawsetu/client-casedetails'" class="btn menu-btn w-100 mb-2" style="color: #ffffff;">Legal Records</button>
+
+							<button class="btn menu-btn w-100 mb-2"
+								onclick="toggleLawyerMenu()" style="color: #ffffff;">
+								Lawyer Finder</button>
+
+							<!-- Submenu -->
+							<div id="lawyerMenu" class="submenu d-none">
+
+								<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+									class="btn sub-btn w-100 mb-2" style="color: red">
+									Civil Case</button>
+								<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+									class="btn sub-btn w-100 mb-2" style="color: red">Family
+									Case</button>
+								<button onclick="window.location.href='/lawsetu/civil-lawyer'"
+									class="btn sub-btn w-100 mb-2" style="color: red">Criminal
+									Case</button>
+
+							</div>
+
+						</div>
+
+
+						<!--Button side end-->
+
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Main Content -->
+			<div class="col-lg-10 col-md-9 p-0">
+
+				<!-- Topbar -->
+				<div
+					class="topbar d-flex justify-content-between align-items-center p-3">
+					<button class="btn btn-dark d-md-none" onclick="toggleSidebar()">☰</button>
+					<h5 class="mb-0">Create Social Profile</h5>
+					<button class="btn btn-warning btn-sm" onclick="toggleTheme()">☀</button>
+				</div>
+
+				<!-- FORM -->
+				<div class="container mt-4 cardTop">
+					<div class="card3d p-4">
+
+						<h4 class="mb-4">Create Your Profile</h4>
+
+						<form style="margin: 2rem; padding: 2rem;">
+
+							<!-- Profile Photo -->
+							<div class="mb-3">
+								<label class="form-label">Profile Photo</label> <input
+									type="file" class="form-control">
+							</div>
+
+							<!-- Name -->
+							<div class="mb-3">
+								<label class="form-label">Full Name *</label> <input type="text"
+									class="form-control" required>
+							</div>
+
+							<!-- Email -->
+							<div class="mb-3">
+								<label class="form-label">Email *</label> <input type="email"
+									class="form-control" required>
+							</div>
+
+							<!-- Phone -->
+							<div class="mb-3">
+								<label class="form-label">Phone *</label> <input type="text"
+									class="form-control" required>
+							</div>
+
+							<!-- OTP Section -->
+							<div class="mb-3">
+								<label class="form-label">Enter OTP</label> <input type="text"
+									class="form-control">
+								<button type="button" class="btn btn-sm btn-warning mt-2">Send
+									OTP</button>
+							</div>
+
+							<!-- Bio -->
+							<div class="mb-3">
+								<label class="form-label">About You</label>
+								<textarea class="form-control" rows="3"></textarea>
+							</div>
+
+							<!-- Submit -->
+							<button type="button" class="btn btn-warning w-100">Create Profile</button>
+
+						</form>
+
+					</div>
+				</div>
+
+				<!-- Footer -->
+				<footer class="text-center mt-5 p-3"
+					style="background: var(--card);"> © 2026 Law सेतु | All
+					Rights Reserved </footer>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Overlay -->
+	<div class="overlay" id="overlay"></div>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Custom JS -->
+	<script >
+	
+	
+	document.addEventListener("DOMContentLoaded", function(){
+
+	    window.toggleSchoolMenu = function(){
+	        const menu = document.getElementById("schoolMenu");
+	        if(menu){
+	            menu.classList.toggle("d-none");
+	        }
+	    }
+
+	    window.toggleLawyerMenu = function(){
+	        const menu = document.getElementById("lawyerMenu");
+	        if(menu){
+	            menu.classList.toggle("d-none");
+	        }
+	    }
+
+	});
+	
+	// Theme Update
+	
+window.onload = function () {
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    document.body.classList.add(savedTheme);
+}
+
+
+function toggleTheme() {
+
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+
+    
+    // SAVE THEME
+
+    if(body.classList.contains("dark")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+    }
+}
+	
+	
+	</script>
+
+</body>
+</html>

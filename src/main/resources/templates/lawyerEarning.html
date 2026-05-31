@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description"
+	content="Track consultation income, payments and earnings history from your LawSetu lawyer account.">
+<meta name="keywords"
+	content="lawyer earnings, advocate income, legal consultation payments, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Lawyer Earnings – LawSetu</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+/* THEME */
+:root {
+	--bg: #FAFAFA;
+	--card: #ffffff;
+	--accent: #D4AF37;
+	--text: #1F2937;
+	--shadow: rgba(0, 0, 0, 0.08);
+}
+
+body.dark {
+	--bg: #0A0A0A;
+	--card: #1A1A1A;
+	--accent: #FFD700;
+	--text: #ffffff;
+	--shadow: rgba(255, 255, 255, 0.06);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: 'Segoe UI', sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+	min-height: 100vh;
+	background: linear-gradient(180deg, #17324D, #0F2235);
+	color: white;
+	box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* TOPBAR */
+.topbar {
+	background: var(--card);
+	box-shadow: 0 5px 20px var(--shadow);
+}
+
+/* BUTTON */
+.btn-warning {
+	background: var(--accent);
+	border: none;
+	color: #000;
+}
+
+/* MENU */
+.menu-btn {
+	background: transparent;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	text-align: center;
+}
+
+.menu-btn.active {
+	background: var(--accent);
+	color: #000;
+}
+
+/* CARD */
+.card3d {
+	background: var(--card);
+	border-radius: 15px;
+	box-shadow: 0 20px 40px var(--shadow);
+	text-align: center;
+	transition: 0.3s;
+}
+
+.card3d:hover {
+	transform: translateY(-5px);
+}
+
+/* STATUS */
+.status-active {
+	color: green;
+}
+
+.status-pending {
+	color: orange;
+}
+
+.status-closed {
+	color: red;
+}
+
+/* MOBILE */
+@media ( max-width :768px) {
+	.sidebar {
+		position: fixed;
+		left: -250px;
+		width: 250px;
+		height: 100%;
+		z-index: 1050;
+		transition: 0.3s;
+	}
+	.sidebar.active {
+		left: 0;
+	}
+}
+
+@media (max-width:993px){
+
+	.sidebar{
+	
+		min-height:60vh
+	
+	}
+
+}
+@media(max-width:250px){
+
+	.theme-btn{
+	
+		display:none;
+	
+	}
+
+}
+/* OVERLAY */
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+
+.overlay.active {
+	display: block;
+}
+
+table {
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+thead {
+	background: var(--accent);
+	color: #000;
+}
+/*Table Color Update*/
+.tbl-data {
+	--bs-table-bg: var(--card);
+	--bs-table-color: var(--text);
+	--bs-table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tbl-data th {
+	background: var(--accent) !important;
+	color: #000 !important;
+}
+
+.tbl-data td {
+	background: var(--card) !important;
+	color: var(--text) !important;
+}
+
+.btn-light {
+	background: transparent;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-control {
+	background-color: var(--card) !important;
+	color: var(--text) !important;
+}
+.card3d{
+	overflow:auto;
+}
+</style>
+</head>
+
+<body class="light">
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- SIDEBAR -->
+			<div class="col-lg-2 sidebar p-3" id="sidebar">
+				<h4 class="text-center">⚖ Law सेतु</h4>
+				<p class="text-center small">Welcome, Lawyer</p>
+				<div class="d-flex flex-column gap-3 mt-4">
+					<button onclick="location.href='lawyer-dashboard'"
+						class="btn menu-btn w-100">Dashboard</button>
+					<button onclick="location.href='lawyer-case-study'"
+						class="btn menu-btn">Cases</button>
+					<button onclick="location.href='lawyer-client-request'"
+						class="btn menu-btn">Clients</button>
+					<button onclick="location.href='lawyer-earning'"
+						class="btn menu-btn active">Earnings</button>
+					<button onclick="location.href='lawyer-profile'"
+						class="btn menu-btn">View Profile</button>
+					<button onclick="location.href='about-lawsetu'"
+						class="btn menu-btn">About Us</button>
+					<button onclick="location.href='/lawsetu'" class="btn menu-btn">Logout</button>
+				</div>
+			</div>
+
+			<!-- MAIN -->
+			<div class="col-lg-10 p-0">
+
+				<!-- TOPBAR -->
+				<div class="topbar p-3 d-flex justify-content-between">
+					<h5>Earnings</h5>
+					<div>
+						<button class="btn btn-warning btn-sm theme-btn" onclick="toggleTheme() ">🌙Mode</button>
+						
+						<button class="btn btn-dark d-md-none " style="margin-left: 1rem;" onclick="toggleSidebar() ">☰</button>
+					</div>
+				</div>
+
+				<!-- CONTENT -->
+				<div class="container mt-4">
+
+					<!-- SUMMARY -->
+					<div class="row g-4">
+
+						<div class="col-md-4">
+							<div class="card3d p-3 text-center">
+								<h6>Total Earnings</h6>
+								<h2 id="totalEarn">₹0</h2>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card3d p-3 text-center">
+								<h6>This Month</h6>
+								<h2 id="monthEarn">₹0</h2>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card3d p-3 text-center">
+								<h6>Total Cases Paid</h6>
+								<h2 id="totalCases">0</h2>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- ADD PAYMENT -->
+					<div class="card3d p-4 mt-4">
+						<h5>Add Payment</h5>
+
+						<div class="row g-3 mt-2">
+							<div class="col-md-3">
+								<input type="text" id="clientName" class="form-control"
+									placeholder="Client Name">
+							</div>
+
+							<div class="col-md-3">
+								<input type="number" id="amount" class="form-control"
+									placeholder="Amount">
+							</div>
+
+							<div class="col-md-3">
+								<input type="date" id="date" class="form-control">
+							</div>
+
+							<div class="col-md-3">
+								<button class="btn btn-warning w-100" onclick="addPayment()">Add</button>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- HISTORY -->
+					<div class="card3d p-4 mt-4">
+						<h5>Earnings History</h5>
+
+						<table class="table tbl-data mt-3" id="earnTable"></table>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="overlay" id="overlay"></div>
+
+	<script>
+	
+	function toggleSidebar() {
+		document.getElementById("sidebar").classList.toggle("active");
+		//document.getElementById("overlay").classList.toggle("active");
+	
+}
+	
+	
+    // ================= DATA =================
+let earnings = JSON.parse(localStorage.getItem("earnings")) || [];
+
+// ================= ADD =================
+function addPayment(){
+    const name = document.getElementById("clientName").value;
+    const amount = document.getElementById("amount").value;
+    const date = document.getElementById("date").value;
+
+    if(!name || !amount || !date){
+        alert("Fill all fields");
+        return;
+    }
+
+    earnings.push({
+        name,
+        amount: parseInt(amount),
+        date
+    });
+
+    save();
+    render();
+}
+
+// ================= SAVE =================
+function save(){
+    localStorage.setItem("earnings", JSON.stringify(earnings));
+}
+
+// ================= RENDER =================
+function render(){
+    let table = document.getElementById("earnTable");
+
+    if(earnings.length === 0){
+        table.innerHTML = "<tr><td>No Data</td></tr>";
+        return;
+    }
+
+    let html = `
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead><tbody>
+    `;
+
+    let total = 0;
+    let monthTotal = 0;
+
+    let currentMonth = new Date().getMonth();
+
+    earnings.forEach(e=>{
+        total += e.amount;
+
+        let month = new Date(e.date).getMonth();
+        if(month === currentMonth){
+            monthTotal += e.amount;
+        }
+
+        html += `
+        <tr>
+            <td>${e.name}</td>
+            <td>₹${e.amount}</td>
+            <td>${e.date}</td>
+        </tr>`;
+    });
+
+    html += "</tbody>";
+    table.innerHTML = html;
+
+    document.getElementById("totalEarn").innerText = "₹" + total;
+    document.getElementById("monthEarn").innerText = "₹" + monthTotal;
+    document.getElementById("totalCases").innerText = earnings.length;
+}
+
+// ================= THEME =================
+
+
+// ================= NAVIGATION =================
+function goToPage(page){
+    window.location.href = page;
+}
+
+// INIT
+render();
+
+//THEME TOGGLE
+window.onload = function () {
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    document.body.classList.add(savedTheme);
+}
+
+
+function toggleTheme() {
+
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+
+    
+    // SAVE THEME
+
+    if(body.classList.contains("dark")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+    }
+}
+
+
+</script>
+
+</body>
+</html>

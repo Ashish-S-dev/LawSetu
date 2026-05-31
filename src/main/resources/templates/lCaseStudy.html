@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description"
+	content="Explore legal case studies and detailed case analysis shared by professional lawyers on LawSetu.">
+<meta name="keywords"
+	content="legal case studies, advocate research, legal analysis, law examples, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Legal Case Studies – LawSetu</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+/* THEME */
+:root {
+	--bg: #FAFAFA;
+	--card: #fff;
+	--accent: #D4AF37;
+	--text: #1F2937;
+}
+
+body.dark {
+	--bg: #0A0A0A;
+	--card: #1A1A1A;
+	--accent: #FFD700;
+	--text: #fff;
+}
+
+body {
+	font-family: Segoe UI, sans-serif;
+	background: var(--bg);
+	color: var(--text);
+}
+
+/* SIDEBAR */
+.sidebar {
+	background: linear-gradient(180deg, #17324D, #0F2235);
+	color: white;
+}
+
+/* CARD */
+.card3d {
+	background: var(--card);
+	border-radius: 15px;
+	padding: 15px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/*Appointment btn */
+.menu-btn {
+	background: transparent;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	text-align: center;
+}
+
+.menu-btn.active {
+	background: var(--accent);
+	color: #000;
+}
+
+/* STATUS */
+.status-active {
+	color: green;
+}
+
+.status-pending {
+	color: orange;
+}
+
+.status-closed {
+	color: red;
+}
+
+.form-control {
+	background-color: var(--card) !important;
+	color: var(--text) !important;
+}
+/*Table Color Update*/
+.tbl-data {
+	--bs-table-bg: var(--card);
+	--bs-table-color: var(--text);
+	--bs-table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tbl-data th {
+	background: var(--accent) !important;
+	color: #000 !important;
+}
+
+.tbl-data td {
+	background: var(--card) !important;
+	color: var(--text) !important;
+}
+
+.btn-light {
+	background: transparent;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.case-study-nav{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	
+}
+@media(max-width:1000px){
+
+	.sidebar{
+		width:100%;
+	}
+
+}
+
+@media(max-width:768px){
+
+
+	 .sidebar{
+        position: fixed;
+        left: -260px;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        z-index: 1000;
+        transition: 0.3s;
+        display: block;
+    }
+
+    .sidebar.active{
+        left: 0;
+    }
+
+}
+
+@media(max-width:380px){
+
+	.mode-btn{
+	
+		display:none;
+	
+	}
+}
+@media(max-width:500px){
+
+	.card3d{
+	
+		overflow:auto;
+	
+	}
+}
+
+/* OVERLAY */
+
+
+
+</style>
+</head>
+
+<body class="light">
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-lg-2 col-md-3 sidebar p-3" id="sidebar">
+
+				<h4 style="text-align: center;">⚖ Law सेतु</h4>
+
+				<p class="text-center small">Welcome, Lawyer</p>
+
+				<div class="d-flex flex-column gap-3 mt-4">
+
+					<button onclick="location.href='lawyer-dashboard'"
+						class="btn menu-btn ">Dashboard</button>
+					<button onclick="location.href='lawyer-case-study'"
+						class="btn menu-btn active">Cases</button>
+					<button onclick="location.href='lawyer-client-request'"
+						class="btn menu-btn">Clients</button>
+					<button onclick="location.href='lawyer-earning'"
+						class="btn menu-btn">Earnings</button>
+					<button onclick="location.href='lawyer-profile'"
+						class="btn menu-btn">View Profile</button>
+						
+					<button onclick="location.href='about-lawsetu'"
+						class="btn menu-btn">About Us</button>
+						
+					<button onclick="location.href='/lawsetu'" class="btn menu-btn">Logout</button>
+
+				</div>
+			</div>
+
+			<!-- SIDEBAR 
+			<div class="col-lg-2 sidebar p-3" id="sidebar">
+				<h4 class="text-center">⚖ Law सेतु</h4>
+				<p class="text-center small">Welcome, Lawyer</p>
+				<button onclick="location.href='lawyer-dashboard'" class="btn btn-light w-100 mt-3">Dashboard</button>
+				<button onclick="location.href='lawyer-case-study'" class="btn btn-warning w-100 mt-3">Cases</button>
+				<button onclick="location.href='lawyer-client-request'" class="btn btn-light w-100 mt-4">Clients</button>
+				<button onclick="location.href='lawyer-earning'" class="btn btn-light w-100 mt-4">Earnings</button>
+				<button onclick="location.href='lawyer-profile'" class="btn btn-light w-100 mt-4">View Profile</button>
+				<button onclick="location.href='/lawsetu'" class="btn btn-light w-100 mt-4">Logout</button>
+
+			</div>-->
+
+			<!-- MAIN -->
+			<div class="col-lg-10 p-4">
+
+				<div class="case-study-nav">
+					
+					<h4>Case Management</h4>
+					
+					<div>
+						<button class="btn btn-warning btn-sm mode-btn" onclick="toggleTheme() ">🌙Mode</button>
+						
+						<button class="btn btn-dark d-md-none " style="margin-left: 1rem;" onclick="toggleSidebar()">☰</button>
+					</div>
+					
+				</div>
+				
+				<!-- ADD CASE -->
+				<div class="card3d mt-3">
+
+					<h5>Add Case</h5>
+
+					<div class="row g-3 mt-2">
+
+						<input id="client" class="form-control" placeholder="Client Name">
+						<input id="type" class="form-control" placeholder="Case Type">
+						<input id="court" class="form-control" placeholder="Court Name">
+
+						<select id="status" class="form-control">
+							<option>Active</option>
+							<option>Pending</option>
+							<option>Closed</option>
+						</select>
+
+						<textarea id="study" class="form-control"
+							placeholder="Case Study / Notes"></textarea>
+
+						<button class="btn btn-warning mt-2" onclick="addCase()">Add
+							Case</button>
+
+					</div>
+				</div>
+
+				<!-- CASE LIST -->
+				<div class="card3d mt-4">
+
+					<h5>All Cases</h5>
+
+					<table class="table tbl-data mt-3" id="caseTable"></table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+	
+	
+	function toggleSidebar() {
+		document.getElementById("sidebar").classList.toggle("active");
+		//document.getElementById("overlay").classList.toggle("active");
+	
+	}
+
+    // ================= DATA =================
+let cases = JSON.parse(localStorage.getItem("cases")) || [];
+
+// ================= ADD CASE =================
+function addCase(){
+    const client = document.getElementById("client").value;
+    const type = document.getElementById("type").value;
+    const court = document.getElementById("court").value;
+    const status = document.getElementById("status").value;
+    const study = document.getElementById("study").value;
+
+    if(!client || !type || !court || !study){
+        alert("Fill all fields");
+        return;
+    }
+
+    cases.push({
+        client,
+        type,
+        court,
+        status,
+        study
+    });
+
+    save();
+    render();
+}
+
+// ================= SAVE =================
+function save(){
+    localStorage.setItem("cases", JSON.stringify(cases));
+}
+
+// ================= RENDER =================
+function render(){
+    const table = document.getElementById("caseTable");
+
+    if(cases.length === 0){
+        table.innerHTML = "<tr><td>No Cases</td></tr>";
+        return;
+    }
+
+    let html = `
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Type</th>
+            <th>Court</th>
+            <th>Status</th>
+            <th>Case Study</th>
+        </tr>
+    </thead><tbody>
+    `;
+
+    cases.forEach(c=>{
+        html += `
+        <tr>
+            <td>${c.client}</td>
+            <td>${c.type}</td>
+            <td>${c.court}</td>
+            <td class="status-${c.status.toLowerCase()}">${c.status}</td>
+            <td>${c.study}</td>
+        </tr>`;
+    });
+
+    html += "</tbody>";
+    table.innerHTML = html;
+}
+
+// ================= NAV =================
+function goToPage(page){
+    window.location.href = page;
+}
+
+
+//THEME TOGGLE
+window.onload = function () {const savedTheme =
+	localStorage.getItem("theme") || "light";document
+	.body.classList.add(savedTheme);
+	
+}
+
+function toggleTheme() {const body = document.body;body
+	.classList.toggle("dark");body .classList.toggle("light"); 
+	
+	// SAVE THEME 
+	if(body.classList.contains("dark")) {
+	localStorage.setItem("theme", "dark");
+	
+}
+
+else {localStorage .setItem("theme", "light");
+	
+}
+}
+
+
+// INIT
+render();
+</script>
+</body>
+</html>

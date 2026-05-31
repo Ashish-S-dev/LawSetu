@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+	content="Securely login to your LawSetu account to manage legal services, consultations and case details.">
+<meta name="keywords"
+	content="LawSetu login, lawyer login, client login, legal portal login, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Login – LawSetu</title>
+
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+
+<body>
+
+	<!-- Parent div with white bg + shadow -->
+	<div class="container-fluid parent">
+		<div class="row">
+			<!-- Left section -->
+			<div class="left">
+				<img th:src="@{/img/LawSetuLogin.png}" alt="LawSetu Logo"
+					class="logo">
+			</div>
+			<!--Left Section END-->
+			<!-- Right section -->
+			<div class="right">
+				<h2>Welcome Back!</h2>
+				<p>Please login to your account</p>
+
+				<!-- Tab buttons -->
+				<div class="login-tabs">
+					<button type="button" class="tab-btn active" data-tab="client">Client</button>
+					<button type="button" class="tab-btn" data-tab="lawyer">Lawyer</button>
+				</div>
+
+				<!-- Client Login Form -->
+				<form id="clientLoginForm" class="login-form active">
+					<div class="form-group">
+						<label for="clientEmail txt-clr">Email Address</label> <input
+							type="email" id="clientEmail" name="email"
+							placeholder="Enter your email" required>
+					</div>
+					<div class="form-group">
+						<label for="clientPassword txt-clr">Password</label> <input
+							type="password" id="clientPassword" name="password"
+							placeholder="Enter your password" required>
+					</div>
+					<a href="#" class="forgot-link txt-clr">Forgot Password?</a>
+					<button type="submit" class="client-login"
+						onclick="clientLogin(event)">Login as Client</button>
+					<div class="signup-link">
+						Don't have an account? <a href="/lawsetu/user-signup">Sign Up</a>
+					</div>
+				</form>
+
+				<!-- Lawyer Login Form -->
+				<form id="lawyerLoginForm" class="login-form">
+					<div class="form-group">
+						<label for="lawyerEmail">Email Address</label> <input type="email"
+							id="lawyerEmail" name="email" placeholder="Enter your email"
+							required>
+					</div>
+					<div class="form-group">
+						<label for="lawyerPassword">Password</label> <input
+							type="password" id="lawyerPassword" name="password"
+							placeholder="Enter your password" required>
+					</div>
+					<div class="form-group">
+						<label for="barCouncilId">Bar Council ID</label> <input
+							type="text" id="barCouncilId" name="barCouncilId"
+							placeholder="Enter your Bar Council ID" required>
+					</div>
+					<a href="#" class="forgot-link">Forgot Password?</a>
+					<button type="button" class="submitLawyer"
+						onclick="lawyerLogin(event)">Login as Lawyer</button>
+					<div class="signup-link">
+						Don't have an account? <a href="">Register as Lawyer</a>
+					</div>
+				</form>
+			</div>
+			<!--Right Section END-->
+		</div>
+		<div class="msg-section">
+			<div id="msg"></div>
+		</div>
+		<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+	</div>
+
+	<script th:src="@{/js/login.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description"
+	content="LawSetu helps clients connect with trusted lawyers for legal consultation, case management, and legal assistance online.">
+<meta name="keywords"
+	content="lawyer, legal help, online advocate, legal consultation, lawsetu, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>LawSetu - Online Legal Consultation Platform</title>
+
+
+<link rel="stylesheet" th:href="@{/css/landingPage.css}">
+<link rel="stylesheet" th:href="@{/css/common.css}">
+
+</head>
+
+<body class="light">
+
+	<!-- NAVBAR -->
+	<nav>
+		<div class="logo">⚖️ LawSetu</div>
+
+		<ul>
+			<li><a href="lawsetu/user-login">Find Lawyer</a></li>
+			<li><a href="lawsetu/user-login">Legal Advice</a></li>
+			<li><a href="lawsetu/user-login">IPC Section</a></li>
+			<li><a href="lawsetu/about-lawsetu">About</a></li>
+			<li><button class="login-btn">
+					<a href="lawsetu/user-login">login</a>/<a
+						href="lawsetu/user-signup">Signup</a>
+				</button></li>
+			<li><button class="toggle-btn" onclick="toggleMode()">🌙
+					Mode</button></li>
+		</ul>
+		<div class="toggle-btn hide-ham-btn" onclick="hamMenuToggle()">☰</div>
+
+	</nav>
+	<!--  Ham btn Design -->
+	<div class="ham-menu">
+		<ul>
+			<li><a href="lawsetu/user-login">Find Lawyer</a></li>
+			<li><a href="lawsetu/user-login">Legal Advice</a></li>
+			<li><a href="lawsetu/user-login">IPC Section</a></li>
+			<li><a href="lawsetu/about-lawsetu">About</a></li>
+			<li><button class="login-btn">
+					<a href="lawsetu/user-login">login</a>/<a
+						href="lawsetu/user-signup">Signup</a>
+				</button></li>
+			<li><button class="toggle-btn" onclick="toggleMode()">🌙
+					Mode</button></li>
+		</ul>
+	</div>
+
+	<!-- HERO -->
+	<section class="hero">
+
+		<div class="hero-text">
+			<h1>
+				Justice Begins <span>Here</span>
+			</h1>
+			<p>Trusted legal guidance, modern case management, fast
+				consultation services for clients and advocates across India.</p>
+
+			<div class="btns">
+				<button class="btn primary-btn">Book Consultation</button>
+				<button class="btn secondary-btn">Learn More</button>
+			</div>
+		</div>
+
+		<div class="hero-image">
+
+			<div class="card">
+				<h3 class="resolved-counter">0+</h3>
+				<p>Cases Resolved Successfully</p>
+			</div>
+
+			<div class="card">
+				<h3>24/7</h3>
+				<p>Online Legal Support</p>
+			</div>
+
+			<div class="card">
+				<h3 class="client-satisfaction">0%</h3>
+				<p>Client Satisfaction Rate</p>
+			</div>
+
+			<div class="card">
+				<h3 class="exp">0+</h3>
+				<p>Years Experience</p>
+			</div>
+
+		</div>
+	</section>
+
+	<div class="msg-section">
+		<div id="msg"></div>
+	</div>
+
+	<!-- LAWYERS -->
+	<section>
+		<h2 class="title">Top Lawyers</h2>
+		<p class="sub">Connect with trusted and verified professionals</p>
+
+		<div class="lawyers">
+
+			<div class="lawyer-card">
+				<img src="https://randomuser.me/api/portraits/men/32.jpg">
+				<h3>Adv. Raj Sharma</h3>
+				<p class="rating">★★★★★</p>
+				<p>12 Years Experience</p>
+				<p>Hazratganj, Lucknow</p>
+				<br>
+				<button class="btn primary-btn">Connect With Us</button>
+			</div>
+
+			<div class="lawyer-card">
+				<img src="https://randomuser.me/api/portraits/women/44.jpg">
+				<h3>Adv. Priya Singh</h3>
+				<p class="rating">★★★★★</p>
+				<p>8 Years Experience</p>
+				<p>Gomti Nagar, Lucknow</p>
+				<br>
+				<button class="btn primary-btn">Connect With Us</button>
+			</div>
+
+			<div class="lawyer-card">
+				<img src="https://randomuser.me/api/portraits/men/55.jpg">
+				<h3>Adv. Amit Verma</h3>
+				<p class="rating">★★★★☆</p>
+				<p>10 Years Experience</p>
+				<p>Aliganj, Lucknow</p>
+				<br>
+				<button class="btn primary-btn">Connect With Us</button>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- SEARCH -->
+	<section>
+		<div class="search-box">
+			<h2>Need Help Finding a Lawyer?</h2>
+			<p>Search according to category, city, rating and experience.</p>
+			<button class="btn primary-btn">Search Lawyer</button>
+		</div>
+	</section>
+
+	<!-- FEEDBACK -->
+	<section>
+		<h2 class="title">Provide your Valuable Feedback</h2>
+		<div id="feedback-input"
+			style="margin-top: 30px; text-align: center; display: flex; justify-content: space-evenly;"
+			class="contact-box">
+
+			<input class="user-name-f" type="text" id="username"
+				placeholder="Your Name"
+				style="padding: 10px; border-radius: 8px; border: none; margin: 5px; background-color: var(--bg);">
+
+			<input class="user-message-f" type="text" id="message"
+				placeholder="Your Feedback"
+				style="padding: 10px; border-radius: 8px; border: none; margin: 5px; background-color: var(--bg);">
+
+			<button onclick="addFeedback()" class="btn primary-btn">Submit</button>
+
+		</div>
+	</section>
+
+	<section>
+		<h2 class="title">What Users Say</h2>
+		<p class="sub">Live reviews from database</p>
+
+		<div class="feedback-wrap" id="feedback">
+
+			<!--  <div class="feedback-card">
+                <h3 id="query-sender">Rohit</h3>
+                <p>⭐⭐⭐⭐⭐</p>
+                <p id="query-msg">Very fast response and trusted lawyer suggestions.</p>
+            </div> -->
+
+			<!-- <div class="feedback-card">
+                <h3>Neha</h3>
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>Booked consultation within minutes. Amazing UI.</p>
+            </div>
+
+            <div class="feedback-card">
+                <h3>Sameer</h3>
+                <p>⭐⭐⭐⭐</p>
+                <p>Helpful legal advice section and smooth experience.</p>
+            </div>
+
+            <div class="feedback-card">
+                <h3>Kajal</h3>
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>Best platform for quick legal support.</p>
+            </div> -->
+
+		</div>
+
+		<div class="controls">
+			<button onclick="scrollLeftCard()">⬅</button>
+			<button onclick="scrollRightCard()">➡</button>
+		</div>
+	</section>
+
+	<!-- COUNTERS -->
+	<section>
+		<h2 class="title">Our Impact</h2>
+
+		<div class="counter-grid">
+
+			<div class="counter">
+				<h2 class="count" data-target="15000">0</h2>
+				<p>Users</p>
+			</div>
+
+			<div class="counter">
+				<h2 class="count" data-target="1200">0</h2>
+				<p>Lawyers</p>
+			</div>
+
+			<div class="counter">
+				<h2 class="count" data-target="4.9">0</h2>
+				<p>Average Rating</p>
+			</div>
+
+			<div class="counter">
+				<h2 class="count" data-target="98">0</h2>
+				<p>Success %</p>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- CONTACT -->
+	<section>
+		<h2 class="title">Connect With Us</h2>
+
+		<div class="contact">
+
+			<div class="contact-box">
+				<h3>Get In Touch</h3>
+				<p>Email: support@lawsetu.in</p>
+				<p>Phone: +91 XXXXXXXXXX</p>
+				<p>Lucknow, Uttar Pradesh</p>
+			</div>
+
+			<div class="contact-box">
+				<input type="text" id="contact-username" placeholder="Your Name">
+				<input type="email" id="contact-useremail" placeholder="Email">
+				<textarea rows="5" id="contact-message" placeholder="Your Message"></textarea>
+				<button class="btn primary-btn" onclick="sendContactMessage()">Send
+					Message</button>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer>
+
+		<div class="footer-grid">
+
+			<div>
+				<h3>⚖️ LawSetu</h3>
+				<p>India's smart legal assistance platform.</p>
+			</div>
+
+			<div>
+				<h3>Quick Links</h3>
+				<li>Find Lawyer</li>
+				<li>Legal Advice</li>
+				<li>IPC Section</li>
+			</div>
+
+			<div>
+				<h3>Support</h3>
+				<li>Help Center</li>
+				<li>Privacy Policy</li>
+				<li>Terms</li>
+			</div>
+
+			<div>
+				<h3>Social</h3>
+				<li>LinkedIn</li>
+				<li>Instagram</li>
+				<li>Twitter</li>
+			</div>
+
+		</div>
+
+		<p class="copy">© 2026 LawSetu. All Rights Reserved.</p>
+
+	</footer>
+
+	<script th:src="@{/js/landingPage.js}"></script>
+
+</body>
+
+</html>

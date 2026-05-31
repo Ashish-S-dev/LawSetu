@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description"
+	content="LawSetu helps clients connect with trusted lawyers for legal consultation, case management, and legal assistance online.">
+<meta name="keywords"
+	content="lawyer, legal help, online advocate, legal consultation, lawsetu, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>LawSetu - Online Legal Consultation Platform</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
+
+<style>
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+
+:root {
+	--bg: #FAFAFA;
+	--card: #ffffff;
+	--primary: #111111;
+	--accent: #D4AF37;
+	--text: #1F2937;
+	--shadow: rgba(0, 0, 0, .08);
+}
+
+/* DARK MODE */
+body.dark {
+	--bg: #0A0A0A;
+	--card: #1A1A1A;
+	--primary: #ffffff;
+	--accent: #FFD700;
+	--text: #ffffff;
+	--shadow: rgba(255, 255, 255, .05);
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family:'Poppins', sans-serif;
+}
+
+body{
+	background:var(--bg);
+	color:var(--text);
+	overflow-x:hidden;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.about-hero{
+	width:100%;
+	min-height:65vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:80px 8%;
+	position:relative;
+	background:
+	linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.75)),
+	url('/img/AboutUsHead.avif');
+	background-size:cover;
+	background-position:center;
+	text-align:center;
+}
+
+.hero-content{
+	max-width:900px;
+}
+
+.hero-content h1{
+	font-size:4rem;
+	color:#fff;
+	margin-bottom:20px;
+	font-weight:700;
+}
+
+.hero-content h1 span{
+	color:var(--accent);
+}
+
+.hero-content p{
+	font-size:1.1rem;
+	line-height:1.9;
+	color:#f5f5f5;
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about-section{
+	padding:90px 8%;
+}
+
+.section-title{
+	text-align:center;
+	margin-bottom:60px;
+}
+
+.section-title h2{
+	font-size:2.8rem;
+	color:var(--primary);
+	margin-bottom:12px;
+}
+
+.section-title p{
+	color:gray;
+	font-size:1rem;
+}
+
+.about-container{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:50px;
+	align-items:center;
+}
+
+.about-image img{
+	width:100%;
+	border-radius:25px;
+	box-shadow:0 10px 35px var(--shadow);
+	object-fit:cover;
+}
+
+.about-text h3{
+	font-size:2rem;
+	margin-bottom:20px;
+	color:var(--primary);
+}
+
+.about-text p{
+	line-height:2;
+	font-size:1rem;
+	margin-bottom:20px;
+	color:var(--text);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+	padding:40px 8% 90px;
+}
+
+.feature-grid{
+	display:grid;
+	grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+	gap:25px;
+}
+
+.feature-card{
+	background:var(--card);
+	padding:35px 25px;
+	border-radius:20px;
+	box-shadow:0 8px 25px var(--shadow);
+	transition:.4s;
+	border:1px solid rgba(212,175,55,.12);
+}
+
+.feature-card:hover{
+	transform:translateY(-10px);
+}
+
+.feature-icon{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	background:rgba(212,175,55,.15);
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:1.4rem;
+	color:var(--accent);
+	margin-bottom:20px;
+}
+
+.feature-card h4{
+	font-size:1.2rem;
+	margin-bottom:15px;
+	color:var(--primary);
+}
+
+.feature-card p{
+	line-height:1.8;
+	font-size:.95rem;
+}
+
+/* =========================
+   TEAM SECTION
+========================= */
+
+.team-section{
+	padding:90px 8%;
+	background:linear-gradient(to bottom right,
+	rgba(212,175,55,.06),
+	transparent);
+}
+
+.team-grid{
+	display:grid;
+	grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+	gap:35px;
+}
+
+.team-card{
+	background:var(--card);
+	border-radius:24px;
+	overflow:hidden;
+	box-shadow:0 10px 30px var(--shadow);
+	transition:.4s;
+	position:relative;
+}
+
+.team-card:hover{
+	transform:translateY(-12px);
+}
+
+.team-image{
+	width:100%;
+	height:300px;
+	overflow:hidden;
+}
+
+.team-image img{
+	width:100%;
+	height:100%;
+	object-fit:cover;
+	object-position: top center;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.team-card:hover img{
+	transform:scale(1.08);
+}
+
+.team-content{
+	padding:28px;
+	text-align:center;
+}
+
+.team-content h3{
+	font-size:1.3rem;
+	color:var(--primary);
+	margin-bottom:8px;
+}
+
+.team-content h5{
+	color:var(--accent);
+	margin-bottom:18px;
+	font-weight:600;
+}
+
+.team-content p{
+	font-size:.95rem;
+	line-height:1.8;
+	color:var(--text);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+	padding:35px 8%;
+	text-align:center;
+	background:var(--card);
+	border-top:1px solid rgba(212,175,55,.1);
+}
+
+.footer h3{
+	color:var(--primary);
+	margin-bottom:10px;
+}
+
+.footer p{
+	color:gray;
+	font-size:.95rem;
+}
+
+.back-btn{
+	position: fixed;
+	top: 20px;
+	right: 25px;
+	padding: 10px 18px;
+	background: var(--accent);
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px var(--shadow);
+	transition: .3s ease;
+	z-index: 1000;
+}
+
+.back-btn:hover{
+	transform: translateY(-2px);
+	opacity: .9;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+	.hero-content h1{
+		font-size:3rem;
+	}
+
+	.about-container{
+		grid-template-columns:1fr;
+	}
+
+}
+
+@media(max-width:600px){
+
+	.hero-content h1{
+		font-size:2.3rem;
+	}
+
+	.section-title h2{
+		font-size:2rem;
+	}
+
+	.about-text h3{
+		font-size:1.6rem;
+	}
+
+	.about-section,
+	.team-section,
+	.features{
+		padding:70px 5%;
+	}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section class="about-hero">
+
+	<div class="hero-content">
+
+		<h1>About <span>LawSetu</span></h1>
+
+		<p>
+			LawSetu is a modern legal assistance platform designed to bridge
+			the gap between clients and legal professionals. Our mission is to
+			make legal services more accessible, transparent, secure, and
+			efficient for everyone.
+		</p>
+
+	</div>
+
+</section>
+<!-- =========================
+Button SECTION
+========================= -->
+<a href="javascript:history.back()" class="back-btn">
+    ← Back
+</a>
+
+<!-- =========================
+     ABOUT SECTION
+========================= -->
+
+<section class="about-section">
+
+	<div class="section-title">
+		<h2>Who We Are</h2>
+		<p>Empowering Legal Connectivity Through Technology</p>
+	</div>
+
+	<div class="about-container">
+
+		<div class="about-image">
+			<img
+				th:src="@{/img/AboutUsHandShake.avif}"
+				alt="">
+		</div>
+
+		<div class="about-text">
+
+			<h3>Transforming Legal Access Digitally</h3>
+
+			<p>
+				LawSetu provides a centralized platform where clients can
+				connect with trusted lawyers seamlessly. Our platform focuses on
+				simplifying legal consultations, improving communication, and
+				delivering a secure digital experience.
+			</p>
+
+			<p>
+				We believe legal services should be simple, transparent, and
+				easily accessible. Through innovation and user-friendly design,
+				LawSetu aims to modernize the legal ecosystem for both clients
+				and legal professionals.
+			</p>
+
+		</div>
+
+	</div>
+
+</section>
+
+<!-- =========================
+     FEATURES SECTION
+========================= -->
+
+<section class="features">
+
+	<div class="section-title">
+		<h2>Why Choose LawSetu</h2>
+		<p>Modern Features Built for Better Legal Experience</p>
+	</div>
+
+	<div class="feature-grid">
+
+		<div class="feature-card">
+
+			<div class="feature-icon">⚖</div>
+
+			<h4>Trusted Lawyers</h4>
+
+			<p>
+				Connect with experienced and verified legal professionals
+				efficiently.
+			</p>
+
+		</div>
+
+		<div class="feature-card">
+
+			<div class="feature-icon">🔒</div>
+
+			<h4>Secure Platform</h4>
+
+			<p>
+				Your information and legal communication remain safe and
+				protected.
+			</p>
+
+		</div>
+
+		<div class="feature-card">
+
+			<div class="feature-icon">💬</div>
+
+			<h4>Easy Communication</h4>
+
+			<p>
+				Simplified interaction between clients and lawyers for faster
+				resolution.
+			</p>
+
+		</div>
+
+		<div class="feature-card">
+
+			<div class="feature-icon">🚀</div>
+
+			<h4>Modern Experience</h4>
+
+			<p>
+				Responsive and user-friendly interface designed for seamless
+				usability.
+			</p>
+
+		</div>
+
+	</div>
+
+</section>
+
+<!-- =========================
+     TEAM SECTION
+========================= -->
+
+<section class="team-section">
+
+	<div class="section-title">
+		<h2>Meet Our Team</h2>
+		<p>The Minds Behind LawSetu</p>
+	</div>
+
+	<div class="team-grid">
+
+		<!-- MEMBER 1 -->
+
+		<div class="team-card">
+
+			<div class="team-image">
+				<img
+					th:src="@{/img/AshishSoni.jpeg}"
+					alt="Team_Member_1_img">
+			</div>
+
+			<div class="team-content">
+
+				<h3>Ashish Soni</h3>
+				<h5>Full Stack Java Developer</h5>
+
+				<p>
+					Backend Developer at LawSetu, responsible for developing scalable backend systems using Spring Boot & MVC Architecture, managing AWS deployment, and handling SEO optimization to improve application performance and online visibility.
+				</p>
+
+			</div>
+
+		</div>
+
+		<!-- MEMBER 2 -->
+
+		<div class="team-card">
+
+			<div class="team-image">
+				<img
+					th:src="@{/img/DurgeshPandey.jpeg}"
+					alt="Team_Member_2_img">
+			</div>
+
+			<div class="team-content">
+
+				<h3>Durgesh Pandey</h3>
+				<h5>Full Stack Java Developer</h5>
+
+				<p>
+					Backend & Full Stack Developer at LawSetu, skilled in Spring Boot, REST API development, React.js page management, and database handling for building scalable, secure, and efficient web applications.
+				</p>
+
+			</div>
+
+		</div>
+
+		<!-- MEMBER 3 -->
+
+		<div class="team-card">
+
+			<div class="team-image">
+				<img
+					th:src="@{/img/ArpitMishra.jpeg}"
+					alt="Team_Member_2_img">
+			</div>
+
+			<div class="team-content">
+
+				<h3>Arpit Mishra</h3>
+				<h5>Full Stack Java Developer</h5>
+
+				<p>
+					Frontend Developer at LawSetu, responsible for designing responsive and user-friendly web interfaces using JavaScript and Bootstrap, ensuring smooth user experience, modern UI design, and cross-device compatibility.
+				</p>
+
+			</div>
+
+		</div>
+
+		<!-- MEMBER 4 -->
+
+		<div class="team-card">
+
+			<div class="team-image">
+				<img
+					th:src="@{/img/AshishYadav.jpeg}"
+					alt="">
+			</div>
+
+			<div class="team-content">
+
+				<h3>Ashish Yadav</h3>
+				<h5>Full Stack Developer</h5>
+
+				<p>
+					Project Coordinator at LawSetu, responsible for managing project planning, team communication, and workflow coordination efficiently to ensure smooth collaboration and timely project execution.
+				</p>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+	<h3>LawSetu</h3>
+
+	<p>
+		Connecting Legal Professionals and Clients Through Technology.
+	</p>
+
+</footer>
+
+<script>
+
+	window.onload = function () {
+
+            const savedTheme = localStorage.getItem("theme") || "light";
+
+            document.body.classList.add(savedTheme);
+        }
+
+</script>
+
+</body>
+</html>

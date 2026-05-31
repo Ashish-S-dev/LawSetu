@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+	content="Attend secure online video consultations with professional lawyers through LawSetu.">
+<meta name="keywords"
+	content="legal video call, online lawyer meeting, virtual consultation, Lawसेतु">
+
+<link rel="icon" type="image/x-icon" th:href="@{/img/lawSetuLogo.png}">
+<title>Video Consultation – LawSetu</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== GLOBAL ===== */
+
+
+
+:root {
+  --bg: #FAFAFA;
+  
+  --card: #ffffff;
+  --primary: #111111;
+  --accent: #D4AF37;
+  --text: #1F2937;
+  --shadow: rgba(0,0,0,.08);
+}
+
+body.dark {
+  --bg: #111;
+  --card: #1c1c1c;
+  --primary: #fff;
+  --accent: #D4AF37;
+  --text: #e5e5e5;
+  --shadow: rgba(255,255,255,.05);
+}
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:var(--bg);
+    color:var(--card);
+}
+
+
+/* ===== TOPBAR ===== */
+.topbar{
+    background-color:var(--card);
+    padding:12px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    color:var(--text);
+}
+
+.logo{
+    font-weight:600;
+    color:var(--text);
+}
+
+/* ===== MAIN CONTAINER ===== */
+.main{
+    min-height:90vh;
+}
+
+/* ===== CARD ===== */
+.call-card{
+    background-color:var(--bg);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+    color:var(--text);
+    margin-top:2rem;
+}
+
+/* ===== BUTTON ===== */
+.btn-call{
+    background:#22c55e;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    color:var(--card);
+    width:100%;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.btn-call:hover{
+    background:#16a34a;
+    transform:scale(1.05);
+}
+
+/* ===== VIDEO ===== */
+#videoContainer{
+    width:100%;
+    height:75vh;
+    margin-top:20px;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    .call-card{
+        padding:20px;
+    }
+
+    #videoContainer{
+        height:65vh;
+    }
+}
+
+.back-btn{
+	padding: 5px 5px;
+	background: var(--accent);
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px var(--shadow);
+	transition: .3s ease;
+	z-index: 1000;
+}
+
+.back-btn:hover{
+	transform: translateY(-2px);
+	opacity: .9;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<div class="topbar">
+    <div class="logo">⚖️ LawSetu</div>
+    <div>
+    	<a href="javascript:history.back()" class="back-btn">← Return home</a> 
+    </div>
+</div>
+
+<!-- =========================
+Button SECTION
+========================= -->
+
+<!-- ===== MAIN ===== -->
+<div class="container main d-flex justify-content-center align-items-center flex-column">
+
+    <!-- CARD -->
+    <div class="call-card w-100" style="max-width:400px;">
+        <h4 class="mb-2">Start Video Call</h4>
+        <p class="text-secondary">Connect instantly with lawyer</p>
+
+        <!-- SAME FUNCTION CALL -->
+        <button class="btn-call" onclick="startCall()">📞 Start Call</button>
+    </div>
+
+    <!-- VIDEO AREA (same ID, API same) -->
+    <div id="videoContainer"></div>
+
+</div>
+
+<!-- ZEGOCLOUD (same) -->
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+
+<!-- YOUR SAME SCRIPT -->
+<script th:src="@{/js/video.js}"></script>
+
+</body>
+</html>

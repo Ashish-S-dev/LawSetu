@@ -1,0 +1,197 @@
+/* ================= THEME ================= */
+*{
+    transition: all .3s ease-in-out;
+}
+/* LIGHT MODE */
+body.light{
+    --bg:#FAFAFA;
+    --card:#ffffff;
+    --primary:#111111;
+    --accent:#D4AF37;
+    --text:#1F2937;
+    --shadow:rgba(0,0,0,0.08);
+}
+
+/* DARK MODE */
+body.dark{
+    --bg:#0A0A0A;
+    --card:#1A1A1A;
+    --primary:#ffffff;
+    --accent:#FFD700;
+    --text:#ffffff;
+    --shadow:rgba(255,255,255,0.06);
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    min-height:100vh;
+    background:#17324D;
+    color:white;
+    transition:0.3s ease;
+}
+
+/* ================= TOPBAR ================= */
+
+.topbar{
+    background:var(--card);
+    box-shadow:0 5px 15px var(--shadow);
+}
+
+/* ================= LOGO ================= */
+
+.logo-img{
+    width:80px;
+    height:80px;
+    object-fit:contain;
+    cursor:pointer;
+    border-radius:50%;
+}
+
+/* ================= CARD ================= */
+.cardTop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card3d{
+    background:var(--card);
+    border-radius:15px;
+    box-shadow:0 15px 35px var(--shadow);
+    transition:0.3s;
+    width: 50rem;
+    
+}
+
+.card3d:hover{
+    transform:perspective(1000px) rotateX(1deg) rotateY(-1deg);
+}
+
+/* ================= FLOATING BUTTONS ================= */
+
+.floating{
+    position:fixed;
+    right:15px;
+    bottom:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.floating button{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:12px;
+    background:var(--accent);
+    font-size:18px;
+    box-shadow:0 10px 20px var(--shadow);
+}
+
+/* ================= MODAL ================= */
+
+.modal-content{
+    background:var(--card);
+    color:var(--text);
+    border-radius:15px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    /* ❌ REMOVE display:none → use slide system */
+    .sidebar{
+        position:fixed;
+        top:0;
+        left:-260px;   /* hidden */
+        width:250px;
+        height:100%;
+        z-index:1050;
+        transition:0.3s ease;
+    }
+
+    .sidebar.active{
+        left:0;   /* visible */
+    }
+
+    /* Logo resize */
+    .logo-img{
+        width:100px;
+        height:100px;
+    }
+}
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:1040;
+}
+
+.overlay.active{
+    display:block;
+}
+/* ================= profile.html ke liye code yaha hai Ashish soni ================= */
+/* ================= DROPDOWN MENU FIX ================= */
+
+/* ===== MENU FIX ===== */
+
+.menu-wrapper{
+    padding: 10px;
+}
+
+/* Remove white box issue */
+.submenu{
+    padding-left: 10px;
+    margin-top: 5px;
+    background: transparent;
+}
+
+/* Main submenu buttons */
+.menu-btn{
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    text-align: left;
+}
+
+/* Sub submenu buttons */
+.sub-btn{
+    background: transparent;
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Hover effects */
+.menu-btn:hover,
+.sub-btn:hover{
+    background: var(--accent);
+    color: #000;
+}
+
+/* Fix Bootstrap override */
+.menu-btn, .sub-btn{
+    box-shadow: none !important;
+}
+/* ================= END OF profile.html ke liye code ================= */
+/* ================= Dashboard ke liye css Ashish Soni dekh lena============= */
+.card3d h2, .card3d h4{
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.card3d{
+    text-align:center;
+}

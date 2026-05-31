@@ -1,0 +1,26 @@
+.msg-section {
+	display: flex;
+	justify-content: center;
+}
+
+#msg {
+	position: fixed;
+	bottom: 4rem;
+	z-index: 100;
+	padding: 12px;
+	margin-top: 15px;
+	border-radius: 8px;
+	font-weight: bold;
+	text-align: center;
+	/* display:none; */
+}
+
+.success {
+	background: #d4edda;
+	color: #155724;
+}
+
+.error {
+	background: #f8d7da;
+	color: #721c24;
+}
