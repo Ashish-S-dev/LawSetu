@@ -253,9 +253,8 @@ The platform includes:
 
 ## 📸 Project Screenshots
 
-Add screenshots of your application here.
 
-```markdown
+
 HomePage
 <img width="1898" height="914" alt="image" src="https://github.com/user-attachments/assets/80991fd6-a86d-461f-a102-bd4c08b89812" />
 
@@ -282,9 +281,6 @@ About us
 Our Team
 <img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/fbae2189-3442-4fe9-b4dc-90dacb4d1998" />
 
-```
-
----
 
 ## 🎓 Academic Project
 
